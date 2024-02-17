@@ -118,7 +118,10 @@ You are an expert in nutritionist where you need to see the food items from the 
 
 if submit:
     if uploaded_file is None:
-        st.warning("No file uploaded. Please upload an image file before proceeding.")
+        warning_message = st.warning("No file uploaded. Please upload an image file before proceeding.")
+        time.sleep(3)  # Display the warning for 3 seconds
+        warning_message.empty()  # Clear the warning message
+
     else:
         image_data = input_image_setup(uploaded_file)
         response = get_gemini_response(input_prompt, image_data)
