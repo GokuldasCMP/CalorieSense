@@ -90,7 +90,7 @@ import streamlit as st
 st.markdown("<h6>Choose a food image....</h6>", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
-iimage=""
+
 if uploaded_file is not None:
     image=Image.open(uploaded_file)
     st.image(image,caption="Uploaded Image.", use_column_width=True)
@@ -117,7 +117,10 @@ You are an expert in nutritionist where you need to see the food items from the 
 """
 
 if submit:
-    image_data=input_image_setup(uploaded_file)
-    response=get_gemini_response(input_prompt,image_data)
-    st.header("The Response is")
-    st.write(response)
+    if uploaded_file is None:
+        st.warning("No file uploaded. Please upload an image file before proceeding.")
+    else:
+        image_data = input_image_setup(uploaded_file)
+        response = get_gemini_response(input_prompt, image_data)
+        st.header("The Response is")
+        st.write(response)
