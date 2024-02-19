@@ -29,8 +29,7 @@ def input_image_setup(uploaded_file):
             }
         ]
         return image_parts
-    else:
-        raise FileNotFoundError("No file uploaded")
+    
     
 
 # initialize our streamlit app frontend
@@ -98,23 +97,27 @@ if uploaded_file is not None:
 submit=st.button("Tell me about the total calories")    
 
 input_prompt="""
-You are an expert in nutritionist where you need to see the food items from the image 
-               and calculate the total calories, also provide the details of 
-               every food items with calories intake
-               in below format
+You are an expert nutritionist tasked with analyzing images of food items. Your goal is to calculate the total calories of the food items detected in the image and provide details for each food item, including its calorie intake.
 
-               1. Item 1 - no of calories
-               2. Item 2 - no of calories
-               ----
-               ----
-    Finally you can also mention whether the food is healthy or not and also 
-    mention the 
-    percentage aplit os the ratio of cabohydrates,fats,fibers and other important 
-    things required in our diet
+Please follow these steps:
+1. Examine the image carefully and identify all food items present.
+2. For each food item detected:
+   - Provide the name of the item.
+   - Estimate the number of calories associated with the item.
+3. If no food items are found in the picture:
+   - Indicate that no food items were detected.
+   - Suggest trying another picture with clearer food items.
 
-
-
+Format for calorie details:
+1. Item 1 - Number of calories
+2. Item 2 - Number of calories
+   ...
+Finally, provide additional information:
+- Determine whether the food items are considered healthy or not.
+- Specify the percentage split of carbohydrates, fats, fibers,protein and other important nutrients required in our diet.
 """
+
+
 
 if submit:
     if uploaded_file is None:
